@@ -1,0 +1,55 @@
+\documentclass[WordOneHalf]{XDUthesis} 
+
+\title{基于压缩感知的大幅面太阳能组件缺陷检测技术}
+\author{席若尧}
+%\date{2015年12月02日}
+
+%题目拆分：用于封面
+\septitleA{基于压缩感知的大幅面}%如果论文题目长度<=11中文字符只需填此项即可B项空着
+\septitleB{太阳能组件缺陷检测技术}%如果论文题目长度>11中文字符, 建议拆分为10+x or 11+x 将剩余x个字符填在此处。
+
+\class{1316029}%班级号
+\schoolnumber{13160299001}%学号
+\major{空间科学与技术}%专业
+\school{空间科学与技术学院}%学院
+\supervisor{谢楷}%指导老师
+
+% Avoid evil "This is unwritten. Stop BB and do it." image :)
+\usepackage{todonotes}
+
+\begin{document}
+
+% 摘要
+\input{ThesisFiles/0000-Abstract}
+
+% 往PDF属性里面写下关键词信息
+\makeatletter
+\XDU@setpdf@keywords
+\makeatother
+
+\maketitle
+
+% 文章主要部分
+
+\input{ThesisFiles/1000-Intro}
+\input{ThesisFiles/1001-Theory}
+\input{ThesisFiles/1002-Analysis}
+\input{ThesisFiles/1003-Experiment}
+\input{ThesisFiles/1004-Enhancement}
+\input{ThesisFiles/1005-Future}
+
+% 致谢
+\input{ThesisFiles/8000-Thanks}
+
+% 参考文献
+\phantomsection%生成该页的链接
+\addcontentsline{toc}{chapter}{\bibname}
+\bibliographystyle{XDUbibunsrt}%不对参考文献排序% XDUbib%对参考文献排序 
+\bibliography{ThesisFiles/RefFile}%在正文中必须引用，才能显示对应的参考文献
+
+% 附录部分
+\appendix
+\input{ThesisFiles/9000-Appendix}
+
+\end{document}
+
