@@ -46,13 +46,13 @@
  \setsansfont{Arial}
  \setmonofont{Courier New}
 \else
-\LoadClass[cs4size,a4paper,UTF8]{ctexbook}[2015/05/16]
- \setCJKmainfont[BoldFont={STZhongsong},ItalicFont={KaiTi}]{SimSun}
- \setCJKsansfont{SimHei}
- \setCJKmonofont{FangSong}
- \setmainfont{Times New Roman}
- \setsansfont{Arial}
- \setmonofont{Courier New}
+\LoadClass[12pt,a4paper,UTF8]{ctexbook}[2015/05/16]
+ \setCJKmainfont[ItalicFont={AR PL New Kai}]{WenQuanYi Zen Hei}
+ \setCJKsansfont{WenQuanYi Micro Hei}
+ \setCJKmonofont{WenQuanYi Micro Hei Mono}
+ \setmainfont{DejaVu Serif}
+ \setsansfont{DejaVu Sans}
+ \setmonofont{DejaVu Sans Mono}
 \fi
 \RequirePackage{ifxetex}
 \RequirePackage{xcolor}
@@ -233,8 +233,8 @@
 \newcommand{\XDU@@eabstract}[1]{\long\gdef\XDU@eabstract{#1}}
 \newenvironment{enabstract}{\collect@body\XDU@@eabstract}{}
 
-\newfontfamily\enheiti{SimHei} % 新加字体族，用于修正封面页标题英文字体非黑体问题，感谢lanthree <https://github.com/lanthree>同学
-\newfontfamily\timesbd{Times New Roman Bold} % 新加字体族，用于修正中文摘要关键词中，英文关键词未加粗问题，感谢lanthree <https://github.com/lanthree>同学
+\newfontfamily\enheiti{WenQuanYi Micro Hei} % 新加字体族，用于修正封面页标题英文字体非黑体问题，感谢lanthree <https://github.com/lanthree>同学
+\newfontfamily\timesbd{DejaVu Serif} % 新加字体族，用于修正中文摘要关键词中，英文关键词未加粗问题，感谢lanthree <https://github.com/lanthree>同学
 \def\make@abstract{%
 \cleardoublepage%
 \pagenumbering{roman}
