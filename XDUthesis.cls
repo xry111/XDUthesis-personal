@@ -41,14 +41,14 @@
 
 \RequirePackage{ifthen}
 \if@Fandol
- \LoadClass[cs4size,a4paper,UTF8,fontset=Fandol]{ctexbook}[2015/05/16]
- \setmainfont{Times New Roman}
- \setsansfont{Arial}
- \setmonofont{Courier New}
+ \LoadClass[cs4size,a4paper,UTF8,fontset=fandol]{ctexbook}[2015/05/16]
+ \setmainfont{DejaVu Serif}
+ \setsansfont{DejaVu Sans}
+ \setmonofont{DejaVu Sans Mono}
 \else
 \LoadClass[12pt,a4paper,UTF8]{ctexbook}[2015/05/16]
- \setCJKmainfont[ItalicFont={AR PL New Kai}]{WenQuanYi Zen Hei}
- \setCJKsansfont{WenQuanYi Micro Hei}
+ \setCJKmainfont[ItalicFont={AR PL New Kai}]{Source Han Sans HW SC}
+ \setCJKsansfont{WenQuanYi Micro Hei Mono}
  \setCJKmonofont{WenQuanYi Micro Hei Mono}
  \setmainfont{DejaVu Serif}
  \setsansfont{DejaVu Sans}
