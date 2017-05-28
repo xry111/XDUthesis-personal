@@ -187,8 +187,8 @@
 \DeclareRobustCommand\onlinecite{\@onlinecite}
 \def\@onlinecite#1{\begingroup\let\@cite\NAT@citenum\citep{#1}\endgroup}
 
-\theorembodyfont{\rmfamily\songti}
-\theoremheaderfont{\rmfamily\heiti}
+\theorembodyfont{\rmfamily}
+\theoremheaderfont{\sffamily}
 \def\XDU@define@term#1{
   \expandafter\gdef\csname #1\endcsname##1{%
     \expandafter\gdef\csname XDU@#1\endcsname{##1}}
