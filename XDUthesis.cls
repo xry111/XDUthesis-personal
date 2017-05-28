@@ -47,12 +47,12 @@
  \setmonofont{DejaVu Sans Mono}
 \else
 \LoadClass[12pt,a4paper,UTF8]{ctexbook}[2015/05/16]
- \setCJKmainfont[ItalicFont={AR PL New Kai}]{Source Han Sans HW SC}
- \setCJKsansfont{WenQuanYi Micro Hei Mono}
- \setCJKmonofont{WenQuanYi Micro Hei Mono}
- \setmainfont{DejaVu Serif}
- \setsansfont{DejaVu Sans}
- \setmonofont{DejaVu Sans Mono}
+ \setCJKmainfont[ItalicFont={AR PL New Kai}, BoldFont={Source Han Sans HW SC}]{Source Han Serif CN}
+ \setCJKsansfont{Source Han Sans HW SC}
+ \setCJKmonofont{Source Han Sans HW SC}
+% \setmainfont{DejaVu Serif}
+% \setsansfont{DejaVu Sans}
+% \setmonofont{DejaVu Sans Mono}
 \fi
 \RequirePackage{ifxetex}
 \RequirePackage{xcolor}
