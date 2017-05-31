@@ -1,3 +1,427 @@
 \section{压缩感知理论简介}
 
-Orz. \todo{dummy}
+传统的图像采集遵循 Nyquist-Shannon 采样定理：
+\begin{theorem}[采样定理] \label{th:Nyquist}
+若函数 $x(t)$ 不含有频率高于 $B$ 的分量，则它可由在一列间距为 $1/(2B)$
+的时间点上的采样值完全确定。
+\end{theorem}
+
+尽管定理 \ref{th:Nyquist} 的描述是针对时域采样，但对于空间域上的图像采集，
+这一定理仍然适用。在日常生活中，如果用 CCD 相机等采样系统拍摄 LCD 显示器
+等光栅系统，若采样系统的采样率过低，就会注意到 \emph{Moir\'e 条纹}，这就
+是欠采样导致的混叠。因此，现实中，人们往往尽量提高图像采集的采样率，以避
+免发生混叠，保留图像中的细节信息。
+
+然而，满足定理 \ref{th:Nyquist} 的采样往往导致过多的冗余测量值，占据巨大
+的存储空间。另一方面，在某些特定应用中，满足定理 \ref{th:Nyquist} 的采样
+会耗费过多的成本和时间。为此，人们开始探索新的采样理论，近年来形成的
+\emph{压缩感知} （Compressive Sensing） 或称 \emph{压缩采样}
+（Compressive Sampling） 理论就是一种重要的新型采样理论。
+
+本文的太阳能电池缺陷检测方法以压缩感知作为理论基础，下面对其进行介绍。
+
+\subsection{稀疏性和可压缩性}
+
+CS 理论指出，可以从 $M (M << N)$ 个测量值中恢复包含 $N$ 个数据样本的信号
+和图像。从信息论的视角来看，只有信号中包含的信息量比其带宽小得多时，才可能
+达到这一目标。这一事实可由信号的 \emph{稀疏性} 或 \emph{可压缩性}反映。
+
+可用 \emph{$\ell_0$ 伪范数} 衡量离散信号（向量）的稀疏性：
+
+\begin{definition}[$\ell_0$ 伪范数] \label{def:l0} 向量 $x$ 的
+$\ell_0$ 伪范数定义为 $\mathbf{x}$ 中非零元素的个数：
+$$\|x\|_0 = |\{k:x_k \neq 0\}|$$
+\end{definition}
+注意定义 \ref{def:l0} 并不满足齐次性，因此不能称为范数或拟范数。
+
+给定了稀疏性的衡量标准后，即可定义哪些向量是稀疏的。
+\begin{definition}[$K$-稀疏] \label{def:K-sparse} 若
+$\|x\|_0 \leq K$ ，则称 $x$ 是 \emph{$K$-稀疏} 的。
+称所有 $K$-稀疏信号组成的集合为 $\Sigma_K$。
+\end{definition}
+
+由于噪声的影响，实际信号不可能是严格稀疏的。但是，如果噪声不是特别强，
+许多实际信号都可以通过稀疏信号近似表达。一般地，在信号 $x$ 中，选取
+$K$ 个幅值最大的元素，将其余元素置为 $0$ ，即可得到该信号在 $\Sigma_K$
+中最优的近似表达 $\hat x$。\cite{KeepK} 近似表达的误差可以用 $\ell_p$
+范数定量衡量。
+\begin{definition}[$\ell_p$ 范数, $\ell_p$ 拟范数] \label{def:lp}
+$$\|x\|_p = \left( \sum x_k^p \right)^{\frac{1}{p}}$$
+若 $p \geq 1$ ，则 $\|x\|_p$ 满足三角不等式，称为 \emph{$\ell_p$ 范数}。
+若 $0 < p < 1$， $\|x\|_p$ 不满足三角不等式，称为 \emph{$\ell_p$ 拟范数}。
+\end{definition}
+
+近似稀疏表达的误差一般用 $\ell_2$ 范数 $\|x - \hat x\|_2$ 加以衡量。信号
+的近似稀疏表达早在压缩感知理论之前就被人们所熟知，并广泛用于
+图像处理\cite{MathProblemImage}、信号压缩、统计学\cite{lasso}等领域。
+
+尽管太阳能电池的缺陷图像并非传统意义上的光学图像，但是在工程实践中，人们仍
+使用传统的图像压缩算法对太阳能电池缺陷图像进行压缩存储，且取得了较好的压缩
+率。这表明，太阳能电池缺陷图像和光学图像一样，都存在较好的近似稀疏表达。
+
+若给定数字图像的分辨率 $H \times W$ ，则该图像可以表示为长度为 $H \times W$
+的向量 $x$ ，该向量由 $H$ 个长度为 $W$ 的向量 $r_1, r_1, \cdots, r_H$
+连接而成，$r_k$ 表示图像的第 $k$ 行的 $W$ 个像素点。尽管在某些应用中将图像
+表示为矩阵，但在 CS 理论中使用一维信号 $x$ 表示图像更为合适（这也是计
+算机内存中二维数组的存储方式），因为 CS 理论本身并不关心信号的拓扑结构。
+
+一般来说，表示图像的信号 $x$ 本身十分稠密。但是在合适的变换域中，该信号可能
+被稀疏化。例如，若图像是水平、垂直方向的正弦波之积，那么 $x$ 不是稀疏的，但
+其二维 Fourier 变换是 $1$-稀疏的。更一般地，可以将 $x$ 表示为 $T$ 个基本
+波形，或称为 \emph{原子} 的线性组合，即
+\begin{equation}
+x = \Phi a = \sum_{i=1}^T a_i \phi_i
+\end{equation}
+其中 $a_i$ 为 $x$ 在 \emph{字典} $\Phi = [\phi_1, \phi_2, \cdots, \phi_T]$
+下的稀疏表示系数；$\Phi$ 为 $N \times T$ 的矩阵，其列向量为原子 $\phi_k$。
+若 $a = [a_1, a_2, \cdots a_T]$ 可用 $K$-稀疏 （$K << N$） 的系数向量
+$\hat a$ 近似表示，则可以只存储 $\hat a$ 中的 $K$ 个非零元素，并以线性组合
+\begin{equation}
+\hat x = \Phi \hat a
+\end{equation}
+较好地近似表示 $x$ 。
+
+字典中原子的个数 $T$ 可能大于，等于，或者小于信号的长度 $N$ 。对于 Fourier
+变换、 Hadamard 变换等正交变换，有 $T = N, \Phi^T = \Phi$ 。若 $T > N$ ，
+则称 $a$ 是 $x$ 的 \emph{过完备表示}。 过完备表示看似浪费，但由于字典中的
+原子更多，可以更好地匹配信号 $x$ 中的各种特征，因此往往能得到更稀疏的近似
+表示。在许多实际情况下，必须使用过完备字典，才能得到较好的稀疏表示。
+
+显然，过完备表示不是唯一的。为了找到最稀疏的过完备表示，需要求解下列优化
+问题：
+\begin{problem}[$\ell_0$ 优化问题]
+\begin{equation}
+\hat a = \mathop{\arg\min}_a \|a\|_0 \quad s.t. \quad \Phi a = x
+\end{equation}
+\end{problem}
+对于有噪声的情况，松弛等式约束，得到：
+\begin{problem}[子集最优化问题] \label{prob:SubsetOpt}
+\begin{equation}
+\hat a = \mathop{\arg\min}_a  \|a\|_0 \quad s.t. \quad \|x - \Phi a\|_2 < \epsilon
+\end{equation}
+\end{problem}
+然而，问题 \ref{prob:SubsetOpt} 是一个 NP 完全问题 \cite{SubsetOptNPC}，
+这类问题的高效精确求解是困扰计算机科学界多年的难题，我们不应贸然挑战这一
+难题。为此，只能近似求解问题 \ref{prob:SubsetOpt} 。一种近似方法是，用具有
+凸性的范数 $\ell_1$ 或 $\ell_2$ 代替 $\ell_0$ ，得到：
+\begin{problem}[Lasso 回归问题] \label{prob:Lasso}
+\begin{equation} \label{eqn:Lasso}
+\hat a = \mathop{\arg\min}_a \|a\|_1 \quad s.t. \quad \|x - \Phi a\|_2 < \epsilon
+\end{equation}
+\end{problem}
+\begin{problem}[岭回归问题] \label{prob:Ridge}
+\begin{equation}
+\hat a = \mathop{\arg\min}_a \|a\|_2 \quad s.t. \quad \|x - \Phi a\|_2 < \epsilon
+\end{equation}
+\end{problem}
+实际上，求解问题 \ref{prob:Ridge} 并不能得到较为稀疏的解。这是由于
+$\ell_2$ 球是一个超球，具有旋转不变性，其解一般不位于坐标轴上。但是对于
+问题 \ref{prob:Lasso} 来说， $\ell_1$ 球是一个正轴形，其角位于坐标轴上。
+在合理的约束条件下，问题 \ref{prob:Lasso} 的解将出现在正轴形的角上，这就
+保证了解的稀疏性。
+
+以上是对稀疏性和稀疏表示的基本介绍。图 \ref{Fig:Compress} 描述了利用稀疏表
+示进行信号压缩的简要过程。
+
+\begin{figure}
+\centering
+\fbox{
+\begin{tikzpicture}[node distance=6cm]
+\node (n0) {原始图像};
+\node [right of=n0] (n1) {可压缩表示};
+\node [right of=n1] (n2) {近似稀疏表示};
+\draw[->] (n0.east) -- node [above] {正交变换} node [below] {或求解问题 \ref{prob:Lasso}} (n1);
+\draw[->] (n1.east) -- node [above] {取 $K$ 个最大元素} (n2);
+\end{tikzpicture}
+} % fbox
+
+\caption{信号压缩简要流程}
+\label{Fig:Compress}
+\end{figure}
+
+在使用过完备表示的图像压缩算法中，我们通过求解问题 \ref{prob:Lasso} ，近似
+求解了问题 \ref{prob:SubsetOpt}，从而从 $N$ 个采样数据计算出 $T > N$ 个组合
+系数 （即过完备表示）。如果我们可以进一步减少采样数据的个数至 $M < N < T$，
+同时保证可以求解问题 \ref{prob:SubsetOpt} 而得到原图像的近似稀疏表示，
+就能够降低采样的时间和设备成本。显然， $M$ 不能无限减小，
+否则将导致问题 \ref{prob:SubsetOpt} 出现 \emph{病态}。
+\begin{definition}[良定问题] \label{def:well-posed}
+若一个优化问题存在唯一解，且该解在输入数据连续变化时也连续变化，则称该
+优化问题\emph{在 Hadamard 意义下良定}。
+\end{definition}
+\begin{definition}[病态问题] \label{def:ill-posed}
+若一个优化问题的解不满足定义 \ref{def:well-posed} 要求的存在性、唯一性或者
+连续性要求，则称该问题是 \emph{病态} 的。 \cite{MathProblemImage}
+\end{definition}
+
+另外，即使问题在数学上是良定的，在实际上，它的解可能并不是正确的过完备表示。
+例如，若简单地随机选取 $M$ 个点进行采样，即有 $(N-M)$ 个缺失的采样点。这是
+数字图像处理中经典的图像修补问题，其良定性早已得到证明。\cite{unknown}
+\todo{Find bib} 然而，采样缺失部分的图像细节显然会丢失。
+
+显然，只有对于特定的矩阵 $\Phi$ ，才能使得问题 $\ref{prob:Lasso}$ 良定，并
+给出一个稀疏的 $\hat{a}$ ，使得 $\hat{x} = \Phi \hat{a}$ 是原图像的良好
+近似。Cand\`es 和 Tao 等人对 $\Phi$ 必须满足的性质进行了研究，在稀疏表示
+理论的基础上建立了压缩感知理论。
+
+\subsection{采样矩阵 $\Phi$ 的特性}
+
+一般来说，研究 $\Phi x = y$ 解集的性质，将从 $\Phi$ 的 \emph{零空间} 入手：
+\begin{definition}[零空间]
+矩阵 $\Phi$ 的 \emph{零空间} 定义为：
+\begin{equation}
+\mathcal{N}(\Phi) = \{z:\Phi z = 0\}
+\end{equation}
+即所有左乘 $\Phi$ 后得到零向量的向量组成的集合。
+\end{definition}
+
+对于任意稀疏信号 $x$ ，如果希望能够基于测量值 $y = \Phi x$ 唯一地重建 $x$，
+则对于任意不同向量 $x_1, x_2 \in \Sigma_K$ ，
+必有 $\Phi x_1 \neq \Phi x_2$，即：
+\begin{equation}
+\Phi (x_1 - x_2) \neq 0
+\end{equation}
+由于 $x_1 - x_2$ 可能是 $\Sigma_{2K}$ 中的任意非零向量，仅当
+\begin{equation}
+\Sigma_{2K} \cap \mathcal{N}(\Phi) = \{0\}
+\end{equation}
+时，即零空间 $\mathcal{N}(\Phi)$ 不包含非零的 $2K$-稀疏向量，
+才能唯一地重建 $x$。
+
+下面考虑非严格稀疏（可压缩）的向量。此时零空间不仅不能包含 $2K$-稀疏向量，
+也不应
+包含可以压缩的近似稀疏向量。设 $\Lambda \subset \{1, 2, \cdots, N\}$ 是
+一组索引， $\Lambda^c = \{1,2,\cdots,N\} \backslash \Lambda$ 是其补集。
+对于向量 $x$ 来说，我们保留其中下标属于 $\Lambda$ 的元素，而把下标属于
+$\Lambda^c$ 的元素置为 $0$ 。据此，可以检验零空间内是否存在近似稀疏的
+向量：
+\begin{definition}[$K$ 阶零空间特性]
+若存在常数 $C > 0$ ，使得对于所有 $h \in \mathcal{N}(\Phi)$ 和所有
+$|\Lambda| \leq K$ 的 $\Lambda$ 都有
+\begin{equation} \label{eq:NSP}
+\|h_\Lambda\|_2 \leq C \frac{\|h_{\Lambda^c}\|_1}{\sqrt{K}}
+\end{equation}
+则称矩阵 $\Phi$ 满足 $K$ 阶 \emph{零空间特性} （NSP）。
+\end{definition}
+NSP 的意义是，零空间中的向量 $h$ 的值并不集中在少数下标上。例如，若 $h$
+是严格 $K$-稀疏的，则存在 $\Lambda$ 使得 $\|h_{\Lambda^c}\|_1 = 0$ 。
+此时式 \ref{eq:NSP} 要求 $\|h_\Lambda\|_2 = 0$。因此，若 $A$ 满足 $K$
+阶 NSP，则零空间 $\mathcal{N}(A)$ 中唯一的 $K$-稀疏向量是 $0$。
+
+% 下列定理表明， NSP 是以较小误差成功恢复 $x$ 的必要条件：
+% \begin{theorem} \label{th:NSP}
+% 若 $\Delta:\mathbb{R}^{M} \rightarrow \mathbb{R}^T$ 是一个从 $M$ 个测量
+% 恢复 $N$ 个系数 $a$ 的算法。若结果的误差由下式限定：
+% \begin{equation}
+% \|\Delta(\Phi x) - x\|_2  \leq  \frac{C}{\sqrt{K}}
+% \min_{\hat x \in \Sigma_K}\|\hat x - x\|_1
+% \end{equation}
+% 则 $\Phi$ 满足 $2K$ 阶 NSP 。
+% \end{theorem}
+% \begin{proof}
+% 假设 $h \in \mathcal{N}(\Phi)$，且 $\Lambda$ 是 $h$ 中最大的 $2K$ 个元素
+% 的下标。将 $\Lambda$ 划分为 $\Lambda_0, \Lambda_1$, 使得
+% $|\Lambda_1| = |\Lambda_2| = K$。令 $x = h_{\Lambda_1} + h_{\Lambda^c}$,
+% $x' = -h_{\Lambda_0}$。由于 $x'$ 是严格 $K$-稀疏的，有 $\Delta(\Phi x')
+% = x'$。注意到 $x - x' = h \in \mathcal{N}(\Phi)$ ，有：
+% \begin{equation}
+% Ah = A(x - x') = 0
+% \end{equation}
+% 即 $\Phi x' = \Phi x$ ，因此 $x' = \Delta(\Phi x)$。可知：
+% \begin{equation}
+% \|h_\Lambda\|_2 \leq \|h\|_2 = \|x - x'\|_2 = \|x - \Delta(\Phi x)\|_2
+% \leq \frac{C}{\sqrt{K}} \min_{\hat x \in \Sigma_K} \|\hat x - x\|_1
+% \leq \frac{\sqrt{2}C}{\sqrt{2K}} \|h_{\Lambda^c}\|_1
+% \end{equation}
+% \end{proof}
+% 
+
+NSP 保证了定义
+\ref{def:well-posed} 中解的唯一性要求。然而，实际信号存在噪声和量化误差，
+因此定义 \ref{def:well-posed} 还要求解的连续性。即，当输入 $y$ 发生微小
+变化时，结果 $\hat x$ 应当也发生微小变化，而不应突变。这就要求更为严格的
+重建条件。 Cand\`es 和 Tao 引入了下面的 \emph{约束等距特性}，
+用以描述在有噪情况下稀疏信号可恢复的条件：
+\begin{definition}[约束等距特性] 若存在 $\delta_k \in (0,1)$ ，使得：
+\begin{equation}
+(1 - \delta_K) \|x\|_2^2 \leq \|\Phi x\|_2^2 \leq (1 + \delta_K) \|x\|_2^2
+\end{equation}
+对所有 $x \in \Sigma_K$ 都成立，则称矩阵 $\Phi$ 满足 $K$ 阶 \emph{约束等距
+特性} （RIP）。使得 $\Phi$ 满足 $K$ 阶 RIP 的最小 $\delta_K$ 称为
+$\Phi$ 的 \emph{约束等距常数}。
+\end{definition}
+
+若矩阵 $\Phi$ 满足 $2K$ 阶 RIP ，则对于任意 $x_1, x_2 \in \Sigma_K$，有：
+\begin{equation}
+(1 - \delta_K) \|x_1 - x_2\|_2^2 \leq \|\Phi x_1 - \Phi x_2\|_2^2
+\leq (1 + \delta_K) \|x\|_2^2
+\end{equation}
+若 $\delta_K$ 很小，则表明，任意两个 $K$-稀疏的向量经过 $\Phi$ 的线性变换
+后，它们的欧几里得距离几乎不变。因此，若输入 $y = \Phi x$ 只受到微小扰动，
+对应的 $x$ 也应只受到微小扰动。
+
+实际上，RIP 比 NSP 更加严格。
+\begin{theorem} \label{th:RIPimpliesESP}
+若矩阵 $\Phi$ 满足 $\delta_K \leq \sqrt{2} - 1$ 时的 K 阶 RIP，则
+$\Phi$ 必然满足 $2K$ 阶 NSP，且式 \ref{eq:NSP} 中的常数
+\begin{equation}
+C = \frac{\sqrt{2} \delta_{2K}}{1 - (1 + \sqrt{2}) \delta_{2K}}
+\end{equation}
+\end{theorem}
+
+定理 \ref{th:RIPimpliesESP} 的详细证明非常复杂，超出了本文的范围，参见参考
+文献 \cite{IntroCS}。
+
+在 RIP 的基础上，Cand\`es 指出，问题 \ref{prob:Lasso} 的解是一个误差较小
+的近似稀疏表示。
+\begin{theorem} \label{th:l1recovery}
+若测量矩阵 $\Phi$ 满足 $2K$ 阶 RIP，且约束等距系数 $\delta_{2K} < 
+\sqrt{2} - 1$，且观测结果
+\begin{equation} \label{eqn:observe}
+y = \Phi x + z
+\end{equation}
+中的噪声 $z$ 满足 $\|z\|_2 \leq \epsilon$，则 Lasso 回归的结果
+\begin{equation}
+\hat x = \mathop{\arg\min}_{x'} \|x'\|_1 \quad s.t. \quad \|y-\Phi x'\|_2
+\leq \epsilon
+\end{equation}
+满足
+\begin{equation}
+\|\hat x - x\|_2 \leq C_0 K^{-1/2} \|x - x_{\Lambda}\|_1 + C_1 \epsilon
+\end{equation}
+其中 $\Lambda$ 是 $x$ 中最大的 $K$ 个元素的下标集合，$C_0$ 和 $C_1$ 是
+与 $\delta_{2K}$ 有关的较小的常数：
+\begin{equation}
+C_0 = 2 \times \frac{1 - (1-\sqrt{2}) \delta_{2K}}{1 - (1+\sqrt{2})
+\delta_{2K}}, \quad C_1 = 4 \times \frac{\sqrt{1 + \delta_{2K}}}
+{1 - (1 + \sqrt{2}) \delta_{2K}}
+\end{equation}
+\end{theorem}
+
+定理 \ref{th:l1recovery} 的证明非常复杂，参见参考文献 \cite{RIPimplieCS}。
+该定理从理论上表明了通过求解 Lasso 回归 （问题 \ref{prob:Lasso}），可以近似
+地重构稀疏表示，且误差是有限的。
+
+如果能够构造矩阵 $\Phi$ ，使其以约束等距常数 $\delta_{2K} < \sqrt{2}-1$
+满足 $2K$ 阶 RIP ，即可用该矩阵作为压缩感知的测量矩阵。实践上，一般采用
+随机方法构造矩阵 $\Phi$ 。具体地，将 $\Phi$ 分解为两个矩阵的乘积
+\begin{equation}
+y = \Phi x = H \Psi x
+\end{equation}
+其中 $\Psi$ 是稀疏字典，以保证 $x$ 的稀疏性；而 $\Psi$ 是一个 $M \times T$
+的随机矩阵，其中 $T$ 是原子的个数， $M$ 是采样点数。已经证明，若 $x$ 足够
+稀疏（稀疏度 $K$ 和 $M$ 相比足够小），且字典 $\Psi$ 充分不相关，则
+$\Phi = H \Psi$ 以高概率满足 $2K$ 阶 RIP 性质。
+\begin{definition}[相关性]
+字典 $\Psi$ 的 \emph{相关性} 定义为：
+\begin{equation}
+\mu(\Psi) = \max_{i \neq j} \frac{|\psi_i^T \psi_j|}{\|\psi_i\|_2
+\|\psi_j\|_2}
+\end{equation}
+即字典中任意两个不同原子（列向量）归一化内积绝对值的最大值。
+\end{definition}
+
+文献 \cite{CSRedundant} 证明了下列定理：
+\begin{theorem}
+若 $x \in \Sigma_K$ ，$2K \leq \mu(\Psi)^{-1}/16+1$ ，$H$ 是元素独立
+同分布的随机矩阵，且采样点数 $M$ 足够大：
+\begin{equation}
+M \geq C_1(2K \log \frac{N}{2K} + 5.57 + t)
+\end{equation}
+其中 $C$ 是和 $H$ 的元素分布有关的常数，则 $\Phi = H \Psi$ 以概率
+$1 - e^{-t}$ 满足 $\delta_{2K} \leq 1/3$ 的 $2K$ 阶 RIP。
+\end{theorem}
+
+由于 $1/3 < \sqrt{2} - 1$ ，该定理表明，矩阵 $\Psi$ 满足定理
+\ref{th:l1recovery} 的要求，可以作为压缩感知的测量矩阵。另外， $t$ 在指数项
+上，表明成功恢复的概率在理论门限附近迅速从 $0$ 增加到接近 $1$。
+
+图 \ref{fig:CS} 描述了压缩感知的采样和稀疏恢复过程。
+
+\begin{figure}
+\centering
+\fbox{
+\begin{tikzpicture}[node distance=6cm]
+\node (n0) {$x = \Psi a$};
+\node [right of=n0] (n1) {$H\Psi a = \Phi a$};
+\node [right of=n1] (n2) {$\hat a = \Delta(\Phi a)$};
+\draw[->] (n0.east) -- node [above] {混叠欠采样} node [below] {测量矩阵
+$\Phi$} (n1);
+\draw[->] (n1.east) -- node [above] {稀疏恢复} node [below] {恢复算法
+$\Delta$} (n2);
+\end{tikzpicture}
+} % fbox
+\caption{压缩感知简要流程}
+\label{fig:CS}
+\end{figure}
+
+我们已经讨论了测量矩阵 $\Phi$ 的性质。下面简要介绍常用的压缩感知稀疏
+恢复算法。
+
+\subsection{压缩感知稀疏恢复算法简介}
+
+在压缩感知的框架下，测量值 $y$ 由式 \ref{eqn:observe} 给出，其中 $\Phi$
+为测量矩阵， $z$ 为噪声。稀疏恢复算法的任务就是，根据给定的 $y$ 和 $\Phi$，
+恢复出原始的稀疏信号 $x$。目前主流的稀疏恢复算法可分为凸优化类算法、贪心
+算法、组合重建算法和贝叶斯算法这四类。下面简要介绍其中最为流行的凸优化类算
+法和贪心算法。
+
+\paragraph{凸优化类算法} 假设 $J(x)$ 是凸函数，且目标信号稀疏时， $J(x)$
+的值较小。对于有噪声的测量值，为了重建稀疏信号 $x$ ，可以通过最小化 $J(x)$
+促进 $x$ 的稀疏性，同时通过距离函数 $H$ 施加约束，使得 $\Phi x$ 接近测量值
+$y$：
+\begin{equation} \label{eqn:convexopt}
+\hat x = \mathop{\arg \min}_{x'} J(x) \quad s.t. \quad H(\Phi x, y) \leq
+\epsilon
+\end{equation}
+若选定 $J(x) = \|x\|_1$，$H(\Phi x, y) = \|\Phi x - y\|_2$，
+则式 \ref{eqn:convexopt} 就成为式 \ref{eqn:Lasso}，即 Lasso 回归问题
+（问题 \ref{prob:Lasso}）。该问题在数学和统计学上具有悠久的历史， Lasso
+回归也是压缩感知领域非常重要的方法。在压缩感知领域， Lasso 回归又被称为
+\emph{基追踪降噪} （BPDN） 问题。
+
+对于图像来说，图像本身并不具有稀疏性，必须使用一稀疏字典 $\Psi$ 发掘其稀疏
+性，才能通过 Lasso 或称 BPDN 求解。然而，在数字图像处理领域，往往可以假设
+图像的梯度（即边缘）是稀疏的，并据此由测量值 $y$ 恢复 $x$。
+\begin{definition} [全变分]
+信号 $x$ 的\emph{全变分}定义为：
+\begin{equation}
+TV(x) = \| |D(x)| \|_1
+\end{equation}
+即信号梯度的模的 $\ell_1$ 范数。
+\end{definition}
+
+根据之前对 $\ell_1$ 范数的讨论，最小化 $TV(x)$ 可以得到梯度稀疏的 $x$ 。
+在式 \ref{eqn:convexopt} 中取 $J(x) = TV(x)$ ，即得到下列问题：
+\begin{problem}
+\begin{equation}
+\hat x = \mathop{\arg \min}_{x'} \quad s.t. \|\Phi x - y\|_2 \leq \epsilon
+\end{equation}
+\end{problem}
+全变分最小化方法在核磁共振成像（MRI）领域的压缩感知问题中表现良好，这是由于
+MRI 图像本身的梯度非常稀疏。然而，如果试图使用全变分最小化方法恢复梯度并不
+稀疏的 $x$ ，将会产生强烈的伪迹。
+
+凸优化是一个古老的研究课题，然而，已有的凸优化工具包往往并不适合压缩感知
+问题。这是由于压缩感知中往往要面对高维信号，对优化求解的效率要求很高，
+常规的优化算法无法满足压缩感知稀疏恢复的要求。例如，一般求解
+\ref{prob:Lasso} 的方法是将其规约为\emph{二阶锥规划}（SOCP） 问题，该问题
+是现代优化方法研究的主要目标之一。但是，在压缩
+感知稀疏恢复中，由于变量数和方程个数很大，SOCP 求解器运行十分缓慢。因此，
+研究压缩感知的学者往往需要重新思考和开发新的优化算法。
+
+\paragraph{贪心算法} 不同于求解巨大的全局优化问题，贪心算法在每一步迭代中
+都选取目前看似最优的方案，期望通过局部最优解而产生全局最优解。
+
+对于压缩感知中的稀疏信号恢复问题，最基本的贪心算法是\emph{匹配跟踪算法}
+（MP）。 在 MP 算法开始时，$x$ 的初步估计值 $x' = 0$，残差
+$r = y - \Phi x'$从字典 $\Phi$ 中选取一个与 $y$ 相关性最大的列
+$\phi_\lambda$ 。若相关系数为 $c$，就将组合系数 $x'_\lambda$ 增加 $c$，
+同时残差将减小 $c \phi_\lambda$。反复执行这一步骤，直到残差的范数小于某个
+预先设定的阈值，该算法终止。
+
+在压缩感知的研究过程中， MP 算法被改进为正交匹配跟踪 （OMP）、逐步正交匹配
+跟踪 （StOMP）、压缩感知匹配跟踪 （CoSaMP）、正则化正交匹配跟踪 （ROMP）、
+等更加优秀的贪心算法。贪心算法的运行速度比全局凸优化快得多，然而抗噪声性能
+很差，极少量的噪声就会导致恢复失败。因此，在实际应用中，往往只能使用
+凸优化方法。
