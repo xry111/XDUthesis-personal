@@ -95,21 +95,21 @@
 \setlength{\headheight}{15pt}
 \fancypagestyle{plain}{%为了章首页
 \fancyhf{}
-\fancyhead[OC]{\zihao{5}\songti\leftmark} %奇数页，章标题
+\fancyhead[OC]{\zihao{5}\rmfamily\leftmark} %奇数页，章标题
 \fancyhead[OR]{\zihao{-5}\thepage}
-\fancyhead[EC]{\zihao{5}\songti\XDU@title} %论文题目
+\fancyhead[EC]{\zihao{5}\rmfamily\XDU@title} %论文题目
 \fancyhead[EL]{\zihao{-5}\thepage}
 \renewcommand\headrulewidth{0.75pt}
 \renewcommand{\footrulewidth}{0pt}}
 
 \fancypagestyle{myheadings}{%为了摘要
 \fancyhf{}
-\fancyhead[C]{\zihao{5}\songti\XDU@abstractname}
+\fancyhead[C]{\zihao{5}\rmfamily\XDU@abstractname}
 \renewcommand{\headrulewidth}{0.75pt}
 \renewcommand{\footrulewidth}{0pt}}
 \fancypagestyle{headings}{%为了abstract
 \fancyhf{}
-\fancyhead[C]{\zihao{5}\songti\XDU@enabstractname}
+\fancyhead[C]{\zihao{5}\rmfamily\XDU@enabstractname}
 \renewcommand{\headrulewidth}{0.75pt}
 \renewcommand{\footrulewidth}{0pt}}
 
@@ -121,9 +121,9 @@
 
 \fancypagestyle{XDU@mulu}{%为了目录
 \fancyhf{}
-\fancyhead[OC]{\zihao{5}\songti\leftmark}
+\fancyhead[OC]{\zihao{5}\rmfamily\leftmark}
 \fancyhead[OR]{\zihao{-5}\thepage}
-\fancyhead[EC]{\zihao{5}\songti\leftmark}
+\fancyhead[EC]{\zihao{5}\rmfamily\leftmark}
 \fancyhead[EL]{\zihao{-5}\thepage}
 \renewcommand{\headrulewidth}{0.75pt}
 \renewcommand{\footrulewidth}{0pt}}
@@ -142,9 +142,9 @@
 
 \fancypagestyle{XDU@main}{%为了主体
 \fancyhf{}
-\fancyhead[OC]{\zihao{5}\songti\leftmark} %奇数页，章标题
+\fancyhead[OC]{\zihao{5}\rmfamily\leftmark} %奇数页，章标题
 \fancyhead[OR]{\zihao{-5}\thepage}
-\fancyhead[EC]{\zihao{5}\songti\XDU@title} %论文题目
+\fancyhead[EC]{\zihao{5}\rmfamily\XDU@title} %论文题目
 \fancyhead[EL]{\zihao{-5}\thepage}
 \renewcommand\headrulewidth{0.75pt}}
 
@@ -167,9 +167,9 @@
 \renewcommand\thempfootnote{\ding{\numexpr171+\value{mpfootnote}}}
 \ctexset{
  chapter/beforeskip = {20pt},
- chapter/format = {\zihao{3}\heiti\centering},%修正章节标题错误加粗问题
- section/format = {\zihao{4}\songti\centering},
- subsection/format = {\zihao{-4}\songti}
+ chapter/format = {\zihao{3}\sffamily\centering},%修正章节标题错误加粗问题
+ section/format = {\zihao{4}\rmfamily\centering},
+ subsection/format = {\zihao{-4}\rmfamily}
 }
 \RequirePackage{titletoc}
 \titlecontents{chapter}[0pt]{\bfseries}%
@@ -233,18 +233,19 @@
 \newcommand{\XDU@@eabstract}[1]{\long\gdef\XDU@eabstract{#1}}
 \newenvironment{enabstract}{\collect@body\XDU@@eabstract}{}
 
-\newfontfamily\enheiti{WenQuanYi Micro Hei} % 新加字体族，用于修正封面页标题英文字体非黑体问题，感谢lanthree <https://github.com/lanthree>同学
-\newfontfamily\timesbd{DejaVu Serif} % 新加字体族，用于修正中文摘要关键词中，英文关键词未加粗问题，感谢lanthree <https://github.com/lanthree>同学
+%\newfontfamily\enheiti{DejaVu Sans} % 新加字体族，用于修正封面页标题英文字体非黑体问题，感谢lanthree <https://github.com/lanthree>同学
+\newcommand{\enheiti}{\sffamily}
+\newfontfamily\timesbd{Source Han Serif CN Heavy} % 新加字体族，用于修正中文摘要关键词中，英文关键词未加粗问题，感谢lanthree <https://github.com/lanthree>同学
 \def\make@abstract{%
 \cleardoublepage%
 \pagenumbering{roman}
 \pagestyle{myheadings}
 \phantomsection
 \vspace*{2em}
-\centerline{\heiti\chaptersize\XDU@abstractname}\vskip5pt\par%
+\centerline{\sffamily\chaptersize\XDU@abstractname}\vskip5pt\par%
 \vspace*{2em}
 \XDU@cabstract%
-\par\vspace*{2em}\noindent{\heiti\zihao{-4}\timesbd{\XDU@keywordsname：\XDU@keywords}}%
+\par\vspace*{2em}\noindent{\sffamily\zihao{-4}\timesbd{\XDU@keywordsname：\XDU@keywords}}%
 \vspace*{1em}%
 \cleardoublepage%
 \pagestyle{headings}
@@ -283,7 +284,7 @@
   \vspace*{2em}
 
   \begin{center}
-  {\centering\heiti{\zihao{0}\XDU@subject}}
+  {\centering\sffamily{\zihao{0}\XDU@subject}}
   \end{center}
 
   \vspace*{3em}
@@ -309,7 +310,7 @@
   \vspace*{4em}
 
   \begin{center}
-  {\centering\heiti{\zihao{0}\XDU@subject}}
+  {\centering\sffamily{\zihao{0}\XDU@subject}}
   \end{center}
 
   \vspace*{5em}
@@ -324,10 +325,10 @@
 
 \begin{center}
 \begin{tabular}{c C{6.5cm}}
-\textbf{\zihao{3}\XDU@titlename} & {\heiti\enheiti\zihao{3}\XDU@septitleA}\\
+\textbf{\zihao{3}\XDU@titlename} & {\sffamily\enheiti\zihao{3}\XDU@septitleA}\\
 \cline{2-2}
  & \\
- & {\heiti\enheiti\zihao{3}\XDU@septitleB}\\
+ & {\sffamily\enheiti\zihao{3}\XDU@septitleB}\\
 \cline{2-2}
  & \\
 \textbf{\zihao{3}\XDU@schoolname} & {\zihao{-3}\XDU@school}\\
@@ -356,11 +357,11 @@
 
 \vspace*{3em}
 
-{\songti{\zihao{4}\XDU@declaretext}}
+{\rmfamily{\zihao{4}\XDU@declaretext}}
 
 \vspace*{8em}
 
-{\songti\zihao{4}\XDU@authornametitle\CJKunderline{\phantom{\qquad\qquad\qquad\quad}}\XDU@signedname\quad\XDU@timename\@date
+{\rmfamily\zihao{4}\XDU@authornametitle\CJKunderline{\phantom{\qquad\qquad\qquad\quad}}\XDU@signedname\quad\XDU@timename\@date
 
 \XDU@supervisorhasread\CJKunderline{\phantom{\qquad\qquad\quad}}\XDU@signedname\quad\XDU@timename\@date}
 
