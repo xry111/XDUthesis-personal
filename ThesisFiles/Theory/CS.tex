@@ -322,7 +322,7 @@ $\Phi = H \Psi$ 以高概率满足 $2K$ 阶 RIP 性质。
 \end{definition}
 
 文献 \cite{CSRedundant} 证明了下列定理：
-\begin{theorem}
+\begin{theorem} \label{th:RandomRIP}
 若 $x \in \Sigma_K$ ，$2K \leq \mu(\Psi)^{-1}/16+1$ ，$H$ 是元素独立
 同分布的随机矩阵，且采样点数 $M$ 足够大：
 \begin{equation}
@@ -393,9 +393,10 @@ TV(x) = \| |D(x)| \|_1
 
 根据之前对 $\ell_1$ 范数的讨论，最小化 $TV(x)$ 可以得到梯度稀疏的 $x$ 。
 在式 \ref{eqn:convexopt} 中取 $J(x) = TV(x)$ ，即得到下列问题：
-\begin{problem}
+\begin{problem} \label{prob:TVopt}
 \begin{equation}
-\hat x = \mathop{\arg \min}_{x'} \quad s.t. \|\Phi x - y\|_2 \leq \epsilon
+\hat x = \mathop{\arg \min}_{x'} TV(x') \quad s.t. \quad 
+\|\Phi x - y\|_2 \leq \epsilon
 \end{equation}
 \end{problem}
 全变分最小化方法在核磁共振成像（MRI）领域的压缩感知问题中表现良好，这是由于
