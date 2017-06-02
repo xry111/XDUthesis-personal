@@ -75,7 +75,8 @@ x = \Phi a = \sum_{i=1}^T a_i \phi_i
 其中 $a_i$ 为 $x$ 在 \emph{字典} $\Phi = [\phi_1, \phi_2, \cdots, \phi_T]$
 下的稀疏表示系数；$\Phi$ 为 $N \times T$ 的矩阵，其列向量为原子 $\phi_k$。
 若 $a = [a_1, a_2, \cdots a_T]$ 可用 $K$-稀疏 （$K << N$） 的系数向量
-$\hat a$ 近似表示，则可以只存储 $\hat a$ 中的 $K$ 个非零元素，并以线性组合
+$\hat a$ 近似表示，且每个原子的 $\ell_2$ 范数 $\|\phi_k\|_2$ 相同（一般应
+对字典作归一化），则可以只存储 $\hat a$ 中的 $K$ 个非零元素，并以线性组合
 \begin{equation}
 \hat x = \Phi \hat a
 \end{equation}
