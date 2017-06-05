@@ -67,26 +67,26 @@ y = Hx = H\Psi a
 
 \begin{figure}
 \centering
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/testdata/0d.png}
 	\caption{坏点}
 	\label{fig:testdata:0d}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/testdata/1d.png}
 	\caption{裂纹}
 	\label{fig:testdata:1d}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/testdata/2dsharp.png}
 	\caption{边缘清晰的坏块}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/testdata/2dsmooth.png}
 	\caption{边缘模糊的坏块}
 	\label{fig:testdata:2dsmooth}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/testdata/2dsharp_finger.png}
 	\caption{坏块与栅状电极}
 \end{subfigure}
@@ -95,8 +95,8 @@ y = Hx = H\Psi a
 \end{figure}
 
 仿真中使用的随机矩阵 $H$ 为 Bernoulli 随机矩阵，其每一行均被标准化，使得
-其 $\ell_2$ 范数为 $1$ ，均值为 $0$ 。这是绝大多数压缩感知稀疏恢复算法对
-矩阵的必要要求。 在实际测量中，我们不可能产生负的光通量，因此需要对采样数据
+其 $\ell_2$ 范数为 $1$ ，均值为 $0$ 。这是多数压缩感知稀疏恢复算法对
+测量矩阵的要求。 在实际测量中，我们不可能产生负的光通量，因此需要对采样数据
 进行预处理，才能用恢复算法进行求解。
 
 为了模拟实际测量时必然存在的噪声影响，我们为每组采样数据叠加 $10\%$ 的高斯
@@ -119,23 +119,23 @@ $8$ 阶 Daubechies 滤波器，迭代次数为 $4$ 次。\cite{ltfatnote015}
 
 \begin{figure}
 \centering
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/testdata/0d.png}
 	\caption{原始数据}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/0d10.png}
 	\caption{$M = 0.1 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/0d30.png}
 	\caption{$M = 0.3 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/0d50.png}
 	\caption{$M = 0.5 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/0d70.png}
 	\caption{$M = 0.7 N$}
 \end{subfigure}
@@ -151,23 +151,23 @@ $8$ 阶 Daubechies 滤波器，迭代次数为 $4$ 次。\cite{ltfatnote015}
 
 \begin{figure}
 \centering
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/testdata/1d.png}
 	\caption{原始数据}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/1d10.png}
 	\caption{$M = 0.1 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/1d30.png}
 	\caption{$M = 0.3 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/1d50.png}
 	\caption{$M = 0.5 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/1d70.png}
 	\caption{$M = 0.7 N$}
 \end{subfigure}
@@ -186,23 +186,23 @@ $10\%$ 的采样即可几乎完美地恢复出图像中的三个坏块。
 
 \begin{figure}
 \centering
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/testdata/2dsharp.png}
 	\caption{原始数据}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/2dsharp10.png}
 	\caption{$M = 0.1 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/2dsharp30.png}
 	\caption{$M = 0.3 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/2dsharp50.png}
 	\caption{$M = 0.5 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/2dsharp70.png}
 	\caption{$M = 0.7 N$}
 \end{subfigure}
@@ -218,23 +218,23 @@ $10\%$ 的采样即可几乎完美地恢复出图像中的三个坏块。
 
 \begin{figure}
 \centering
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/testdata/2dsmooth.png}
 	\caption{原始数据}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/2dsmooth10.png}
 	\caption{$M = 0.1 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/2dsmooth30.png}
 	\caption{$M = 0.3 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/2dsmooth50.png}
 	\caption{$M = 0.5 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/2dsmooth70.png}
 	\caption{$M = 0.7 N$}
 \end{subfigure}
@@ -248,23 +248,23 @@ $10\%$ 的采样即可几乎完美地恢复出图像中的三个坏块。
 
 \begin{figure}
 \centering
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/testdata/2dsharp_finger.png}
 	\caption{原始数据}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/finger10.png}
 	\caption{$M = 0.1 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/finger30.png}
 	\caption{$M = 0.3 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/finger50.png}
 	\caption{$M = 0.5 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/finger70.png}
 	\caption{$M = 0.7 N$}
 \end{subfigure}
@@ -284,23 +284,23 @@ $\ell_1$ 范数最小化重建采用 Zhang 等编写的 \verb|YALL1| 软件包�
 
 \begin{figure}
 \centering
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/testdata/0d.png}
 	\caption{原始数据}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/0d10.png}
 	\caption{$M = 0.1 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/0d30.png}
 	\caption{$M = 0.3 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/0d50.png}
 	\caption{$M = 0.5 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/0d70.png}
 	\caption{$M = 0.7 N$}
 \end{subfigure}
@@ -327,23 +327,23 @@ $M=0.5$ 时更多，直观上图像质量发生了退化。这是由于 $\Phi$ �
 
 \begin{figure}
 \centering
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/testdata/1d.png}
 	\caption{原始数据}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/1d10.png}
 	\caption{$M = 0.1 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/1d30.png}
 	\caption{$M = 0.3 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/1d50.png}
 	\caption{$M = 0.5 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/TV/1d70.png}
 	\caption{$M = 0.7 N$}
 \end{subfigure}
@@ -360,23 +360,23 @@ $M=0.5$ 时更多，直观上图像质量发生了退化。这是由于 $\Phi$ �
 
 \begin{figure}
 \centering
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/testdata/2dsharp.png}
 	\caption{原始数据}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/2dsharp10.png}
 	\caption{$M = 0.1 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/2dsharp30.png}
 	\caption{$M = 0.3 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/2dsharp50.png}
 	\caption{$M = 0.5 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/2dsharp70.png}
 	\caption{$M = 0.7 N$}
 \end{subfigure}
@@ -391,23 +391,23 @@ $M=0.5$ 时更多，直观上图像质量发生了退化。这是由于 $\Phi$ �
 
 \begin{figure}
 \centering
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/testdata/2dsmooth.png}
 	\caption{原始数据}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/2dsmooth10.png}
 	\caption{$M = 0.1 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/2dsmooth30.png}
 	\caption{$M = 0.3 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/2dsmooth50.png}
 	\caption{$M = 0.5 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/2dsmooth70.png}
 	\caption{$M = 0.7 N$}
 \end{subfigure}
@@ -421,23 +421,23 @@ $M=0.5$ 时更多，直观上图像质量发生了退化。这是由于 $\Phi$ �
 
 \begin{figure}
 \centering
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/testdata/2dsharp_finger.png}
 	\caption{原始数据}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/finger10.png}
 	\caption{$M = 0.1 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/finger30.png}
 	\caption{$M = 0.3 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/finger50.png}
 	\caption{$M = 0.5 N$}
 \end{subfigure}
-\begin{subfigure}[t]{1in}
+\begin{subfigure}[t]{1.1in}
 	\includegraphics{Figure/L1/finger70.png}
 	\caption{$M = 0.7 N$}
 \end{subfigure}

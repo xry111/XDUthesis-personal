@@ -1,11 +1,39 @@
 % 中文摘要
 \begin{abstract}
-吊吊吊吊吊。 \todo{dummy}
+本文介绍了太阳能电池的基本理论和工艺结构，描述了太阳能电池中的缺陷，总结了
+传统的太阳能电池缺陷检测方法的优缺点；详细介绍了压缩感知理论；
+介绍了近年来基于压缩
+感知理论检测太阳能电池缺陷的新型方法，完成了基于压缩感知的太阳能电池缺陷
+检测的数值仿真；介绍了现有的基于压缩感知的太阳能电池缺陷检测原型装置，及
+其实现过程中遇到的困难。
+
+针对太阳能电池栅状电极影响测量结果可压缩性，造成压缩感知检测方法的效率难以
+进一步提高的问题，本文分别考虑栅状电极和实际的缺陷，将栅状电极视为对缺陷
+分布图像的遮挡。通过光学成像获得栅状电极的遮挡区域，借鉴对于图像遮挡的修补
+算法，对压缩感知的稀疏恢复算法进行改进，在求解过程中利用已知的遮挡区域信息，
+同时修补图像遮挡，从而消除恢复结果中的栅状电极，增强结果的稀疏性，从而达到
+降低采样次数，提高检测效率的目的。
 \end{abstract}
-\keywords{Orz, sro, OTZ}
+\keywords{太阳能电池, 缺陷, 压缩感知, 稀疏性, 图像修补}
 
 % 英文摘要
 \begin{enabstract}
-OrzOrz. \todo{dummy}
+At first the basic theory, the processing and the structure of solar cells
+are introduced.  The compressive sensing theory, and the new method to
+detect solar cell defects with it are introduced in detail.  The numerical
+emulation of this method is completed.  The existing prototypes detecting
+solar cell defects with compressive sensing are introduced, and the
+difficulties implementing them are discussed.
+
+The fingers and busbars on the solar cells are affecting the sparsity of
+solar cell defect image notably.  The time effiency of compressive
+sensing method is limited by them.  To solve this issue, the fingers and
+busbars and normal defects are considered seperately.  The fingers and
+busbars are regarded as occlude areas of the defect image, and can be
+acquiststioned with a optical camera.  Referencing the image inpainting,
+the sparse signal recovery algorithms in compressive sensing are altered
+to input the known occlude areas and inpaint them simutaniously.  The
+result image without fingers and busbars are more sparse so the sampling
+number could be reduced and the time effiency can be inproved.
 \end{enabstract}
-\enkeywords{oooooorz, ooorz}
+\enkeywords{solar cells, defects, compressive sensing, sparsity, image inpainting}

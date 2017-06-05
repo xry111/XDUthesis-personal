@@ -15,7 +15,7 @@
 然而，满足定理 \ref{th:Nyquist} 的采样往往导致过多的冗余测量值，占据巨大
 的存储空间。另一方面，在某些特定应用中，满足定理 \ref{th:Nyquist} 的采样
 会耗费过多的成本和时间。为此，人们开始探索新的采样理论，近年来形成的
-\emph{压缩感知} （Compressive Sensing） 或称 \emph{压缩采样}
+\emph{压缩感知} （Compressive Sensing） 或称\emph{压缩采样}
 （Compressive Sampling） 理论就是一种重要的新型采样理论。
 
 本文的太阳能电池缺陷检测方法以压缩感知作为理论基础，下面对其进行介绍。
@@ -24,13 +24,15 @@
 
 CS 理论指出，可以从 $M (M << N)$ 个测量值中恢复包含 $N$ 个数据样本的信号
 和图像。从信息论的视角来看，只有信号中包含的信息量比其带宽小得多时，才可能
-达到这一目标。这一事实可由信号的 \emph{稀疏性} 或 \emph{可压缩性}反映。
+达到这一目标。这一事实可由信号的\emph{稀疏性}或\emph{可压缩性}反映。
 
-可用 \emph{$\ell_0$ 伪范数} 衡量离散信号（向量）的稀疏性：
+可用 \emph{$\ell_0$ 伪范数}衡量离散信号（向量）的稀疏性：
 
 \begin{definition}[$\ell_0$ 伪范数] \label{def:l0} 向量 $x$ 的
 $\ell_0$ 伪范数定义为 $\mathbf{x}$ 中非零元素的个数：
-$$\|x\|_0 = |\{k:x_k \neq 0\}|$$
+\begin{equation}
+\|x\|_0 = |\{k:x_k \neq 0\}|
+\end{equation}
 \end{definition}
 注意定义 \ref{def:l0} 并不满足齐次性，因此不能称为范数或拟范数。
 
@@ -46,14 +48,16 @@ $K$ 个幅值最大的元素，将其余元素置为 $0$ ，即可得到该信�
 中最优的近似表达 $\hat x$。\cite{KeepK} 近似表达的误差可以用 $\ell_p$
 范数定量衡量。
 \begin{definition}[$\ell_p$ 范数, $\ell_p$ 拟范数] \label{def:lp}
-$$\|x\|_p = \left( \sum x_k^p \right)^{\frac{1}{p}}$$
+\begin{equation}
+\|x\|_p = \left( \sum x_k^p \right)^{\frac{1}{p}}
+\end{equation}
 若 $p \geq 1$ ，则 $\|x\|_p$ 满足三角不等式，称为 \emph{$\ell_p$ 范数}。
 若 $0 < p < 1$， $\|x\|_p$ 不满足三角不等式，称为 \emph{$\ell_p$ 拟范数}。
 \end{definition}
 
 近似稀疏表达的误差一般用 $\ell_2$ 范数 $\|x - \hat x\|_2$ 加以衡量。信号
 的近似稀疏表达早在压缩感知理论之前就被人们所熟知，并广泛用于
-图像处理\cite{MathProblemImage}、信号压缩、统计学\cite{lasso}等领域。
+图像处理\cite{SparseImage}、信号压缩、统计学\cite{lasso}等领域。
 
 尽管太阳能电池的缺陷图像并非传统意义上的光学图像，但是在工程实践中，人们仍
 使用传统的图像压缩算法对太阳能电池缺陷图像进行压缩存储，且取得了较好的压缩
@@ -68,11 +72,11 @@ $$\|x\|_p = \left( \sum x_k^p \right)^{\frac{1}{p}}$$
 一般来说，表示图像的信号 $x$ 本身十分稠密。但是在合适的变换域中，该信号可能
 被稀疏化。例如，若图像是水平、垂直方向的正弦波之积，那么 $x$ 不是稀疏的，但
 其二维 Fourier 变换是 $1$-稀疏的。更一般地，可以将 $x$ 表示为 $T$ 个基本
-波形，或称为 \emph{原子} 的线性组合，即
+波形，或称为\emph{原子}的线性组合，即
 \begin{equation}
 x = \Phi a = \sum_{i=1}^T a_i \phi_i
 \end{equation}
-其中 $a_i$ 为 $x$ 在 \emph{字典} $\Phi = [\phi_1, \phi_2, \cdots, \phi_T]$
+其中 $a_i$ 为 $x$ 在\emph{字典} $\Phi = [\phi_1, \phi_2, \cdots, \phi_T]$
 下的稀疏表示系数；$\Phi$ 为 $N \times T$ 的矩阵，其列向量为原子 $\phi_k$。
 若 $a = [a_1, a_2, \cdots a_T]$ 可用 $K$-稀疏 （$K << N$） 的系数向量
 $\hat a$ 近似表示，且每个原子的 $\ell_2$ 范数 $\|\phi_k\|_2$ 相同（一般应
@@ -84,7 +88,7 @@ $\hat a$ 近似表示，且每个原子的 $\ell_2$ 范数 $\|\phi_k\|_2$ 相同
 
 字典中原子的个数 $T$ 可能大于，等于，或者小于信号的长度 $N$ 。对于 Fourier
 变换、 Hadamard 变换等正交变换，有 $T = N, \Phi^T = \Phi$ 。若 $T > N$ ，
-则称 $a$ 是 $x$ 的 \emph{过完备表示}。 过完备表示看似浪费，但由于字典中的
+则称 $a$ 是 $x$ 的\emph{过完备表示}。 过完备表示看似浪费，但由于字典中的
 原子更多，可以更好地匹配信号 $x$ 中的各种特征，因此往往能得到更稀疏的近似
 表示。在许多实际情况下，必须使用过完备字典，才能得到较好的稀疏表示。
 
@@ -101,7 +105,7 @@ $\hat a$ 近似表示，且每个原子的 $\ell_2$ 范数 $\|\phi_k\|_2$ 相同
 \hat a = \mathop{\arg\min}_a  \|a\|_0 \quad s.t. \quad \|x - \Phi a\|_2 < \epsilon
 \end{equation}
 \end{problem}
-然而，问题 \ref{prob:SubsetOpt} 是一个 NP 完全问题 \cite{SubsetOptNPC}，
+然而，问题 \ref{prob:SubsetOpt} 是一个 NP 难度问题 \cite{GJ79} \cite{SubsetOptNPC}，
 这类问题的高效精确求解是困扰计算机科学界多年的难题，我们不应贸然挑战这一
 难题。为此，只能近似求解问题 \ref{prob:SubsetOpt} 。一种近似方法是，用具有
 凸性的范数 $\ell_1$ 或 $\ell_2$ 代替 $\ell_0$ ，得到：
@@ -145,20 +149,20 @@ $\ell_2$ 球是一个超球，具有旋转不变性，其解一般不位于坐�
 系数 （即过完备表示）。如果我们可以进一步减少采样数据的个数至 $M < N < T$，
 同时保证可以求解问题 \ref{prob:SubsetOpt} 而得到原图像的近似稀疏表示，
 就能够降低采样的时间和设备成本。显然， $M$ 不能无限减小，
-否则将导致问题 \ref{prob:SubsetOpt} 出现 \emph{病态}。
+否则将导致问题 \ref{prob:SubsetOpt} 出现\emph{病态}。
 \begin{definition}[良定问题] \label{def:well-posed}
 若一个优化问题存在唯一解，且该解在输入数据连续变化时也连续变化，则称该
 优化问题\emph{在 Hadamard 意义下良定}。
 \end{definition}
 \begin{definition}[病态问题] \label{def:ill-posed}
 若一个优化问题的解不满足定义 \ref{def:well-posed} 要求的存在性、唯一性或者
-连续性要求，则称该问题是 \emph{病态} 的。 \cite{MathProblemImage}
+连续性要求，则称该问题是\emph{病态} 的。 \cite{MathProblemImage}
 \end{definition}
 
 另外，即使问题在数学上是良定的，在实际上，它的解可能并不是正确的过完备表示。
 例如，若简单地随机选取 $M$ 个点进行采样，即有 $(N-M)$ 个缺失的采样点。这是
-数字图像处理中经典的图像修补问题，其良定性早已得到证明。\cite{unknown}
-\todo{Find bib} 然而，采样缺失部分的图像细节显然会丢失。
+数字图像处理中经典的图像修补问题，其良定性早已得到证明。\cite{inpainting}
+ 然而，采样缺失部分的图像细节显然会丢失。
 
 显然，只有对于特定的矩阵 $\Phi$ ，才能使得问题 $\ref{prob:Lasso}$ 良定，并
 给出一个稀疏的 $\hat{a}$ ，使得 $\hat{x} = \Phi \hat{a}$ 是原图像的良好
@@ -167,27 +171,27 @@ $\ell_2$ 球是一个超球，具有旋转不变性，其解一般不位于坐�
 
 \subsection{采样矩阵 $\Phi$ 的特性}
 
-一般来说，研究 $\Phi x = y$ 解集的性质，将从 $\Phi$ 的 \emph{零空间} 入手：
+一般来说，研究 $\Phi x = y$ 解集的性质，将从 $\Phi$ 的\emph{零空间} 入手：
 \begin{definition}[零空间]
-矩阵 $\Phi$ 的 \emph{零空间} 定义为：
+矩阵 $\Phi$ 的\emph{零空间} 定义为：
 \begin{equation}
 \mathcal{N}(\Phi) = \{z:\Phi z = 0\}
 \end{equation}
 即所有左乘 $\Phi$ 后得到零向量的向量组成的集合。
 \end{definition}
 
-对于任意稀疏信号 $x$ ，如果希望能够基于测量值 $y = \Phi x$ 唯一地重建 $x$，
-则对于任意不同向量 $x_1, x_2 \in \Sigma_K$ ，
-必有 $\Phi x_1 \neq \Phi x_2$，即：
+对于任意稀疏信号 $a$ ，如果希望能够基于测量值 $y = \Phi a$ 唯一地重建 $a$，
+则对于任意不同向量 $a_1, a_2 \in \Sigma_K$ ，
+必有 $\Phi a_1 \neq \Phi a_2$，即：
 \begin{equation}
-\Phi (x_1 - x_2) \neq 0
+\Phi (a_1 - a_2) \neq 0
 \end{equation}
-由于 $x_1 - x_2$ 可能是 $\Sigma_{2K}$ 中的任意非零向量，仅当
+由于 $a_1 - a_2$ 可能是 $\Sigma_{2K}$ 中的任意非零向量，仅当
 \begin{equation}
 \Sigma_{2K} \cap \mathcal{N}(\Phi) = \{0\}
 \end{equation}
 时，即零空间 $\mathcal{N}(\Phi)$ 不包含非零的 $2K$-稀疏向量，
-才能唯一地重建 $x$。
+才能唯一地重建 $a$。
 
 下面考虑非严格稀疏（可压缩）的向量。此时零空间不仅不能包含 $2K$-稀疏向量，
 也不应
@@ -202,7 +206,7 @@ $|\Lambda| \leq K$ 的 $\Lambda$ 都有
 \begin{equation} \label{eq:NSP}
 \|h_\Lambda\|_2 \leq C \frac{\|h_{\Lambda^c}\|_1}{\sqrt{K}}
 \end{equation}
-则称矩阵 $\Phi$ 满足 $K$ 阶 \emph{零空间特性} （NSP）。
+则称矩阵 $\Phi$ 满足 $K$ 阶\emph{零空间特性} （NSP）。
 \end{definition}
 NSP 的意义是，零空间中的向量 $h$ 的值并不集中在少数下标上。例如，若 $h$
 是严格 $K$-稀疏的，则存在 $\Lambda$ 使得 $\|h_{\Lambda^c}\|_1 = 0$ 。
@@ -240,26 +244,26 @@ NSP 的意义是，零空间中的向量 $h$ 的值并不集中在少数下标�
 NSP 保证了定义
 \ref{def:well-posed} 中解的唯一性要求。然而，实际信号存在噪声和量化误差，
 因此定义 \ref{def:well-posed} 还要求解的连续性。即，当输入 $y$ 发生微小
-变化时，结果 $\hat x$ 应当也发生微小变化，而不应突变。这就要求更为严格的
-重建条件。 Cand\`es 和 Tao 引入了下面的 \emph{约束等距特性}，
+变化时，结果 $\hat a$ 应当也发生微小变化，而不应突变。这就要求更为严格的
+重建条件。 Cand\`es 和 Tao 引入了下面的\emph{约束等距特性}，
 用以描述在有噪情况下稀疏信号可恢复的条件：
 \begin{definition}[约束等距特性] 若存在 $\delta_k \in (0,1)$ ，使得：
 \begin{equation}
-(1 - \delta_K) \|x\|_2^2 \leq \|\Phi x\|_2^2 \leq (1 + \delta_K) \|x\|_2^2
+(1 - \delta_K) \|a\|_2^2 \leq \|\Phi a\|_2^2 \leq (1 + \delta_K) \|a\|_2^2
 \end{equation}
-对所有 $x \in \Sigma_K$ 都成立，则称矩阵 $\Phi$ 满足 $K$ 阶 \emph{约束等距
+对所有 $a \in \Sigma_K$ 都成立，则称矩阵 $\Phi$ 满足 $K$ 阶\emph{约束等距
 特性} （RIP）。使得 $\Phi$ 满足 $K$ 阶 RIP 的最小 $\delta_K$ 称为
-$\Phi$ 的 \emph{约束等距常数}。
+$\Phi$ 的\emph{约束等距常数}。
 \end{definition}
 
-若矩阵 $\Phi$ 满足 $2K$ 阶 RIP ，则对于任意 $x_1, x_2 \in \Sigma_K$，有：
+若矩阵 $\Phi$ 满足 $2K$ 阶 RIP ，则对于任意 $a_1, a_2 \in \Sigma_K$，有：
 \begin{equation}
-(1 - \delta_K) \|x_1 - x_2\|_2^2 \leq \|\Phi x_1 - \Phi x_2\|_2^2
-\leq (1 + \delta_K) \|x\|_2^2
+(1 - \delta_K) \|a_1 - a_2\|_2^2 \leq \|\Phi a_1 - \Phi a_2\|_2^2
+\leq (1 + \delta_K) \|a_1 - a_2\|_2^2
 \end{equation}
 若 $\delta_K$ 很小，则表明，任意两个 $K$-稀疏的向量经过 $\Phi$ 的线性变换
-后，它们的欧几里得距离几乎不变。因此，若输入 $y = \Phi x$ 只受到微小扰动，
-对应的 $x$ 也应只受到微小扰动。
+后，它们的欧几里得距离几乎不变。因此，若输入 $x = \Phi a$ 只受到微小扰动，
+对应的 $a$ 也应只受到微小扰动。
 
 实际上，RIP 比 NSP 更加严格。
 \begin{theorem} \label{th:RIPimpliesESP}
@@ -279,18 +283,18 @@ C = \frac{\sqrt{2} \delta_{2K}}{1 - (1 + \sqrt{2}) \delta_{2K}}
 若测量矩阵 $\Phi$ 满足 $2K$ 阶 RIP，且约束等距系数 $\delta_{2K} < 
 \sqrt{2} - 1$，且观测结果
 \begin{equation} \label{eqn:observe}
-y = \Phi x + z
+y = \Phi a + z
 \end{equation}
 中的噪声 $z$ 满足 $\|z\|_2 \leq \epsilon$，则 Lasso 回归的结果
 \begin{equation}
-\hat x = \mathop{\arg\min}_{x'} \|x'\|_1 \quad s.t. \quad \|y-\Phi x'\|_2
+\hat a = \mathop{\arg\min}_{a'} \|a'\|_1 \quad s.t. \quad \|y-\Phi a'\|_2
 \leq \epsilon
 \end{equation}
 满足
 \begin{equation}
-\|\hat x - x\|_2 \leq C_0 K^{-1/2} \|x - x_{\Lambda}\|_1 + C_1 \epsilon
+\|\hat a - a\|_2 \leq C_0 K^{-1/2} \|a - a_{\Lambda}\|_1 + C_1 \epsilon
 \end{equation}
-其中 $\Lambda$ 是 $x$ 中最大的 $K$ 个元素的下标集合，$C_0$ 和 $C_1$ 是
+其中 $\Lambda$ 是 $a$ 中最大的 $K$ 个元素的下标集合，$C_0$ 和 $C_1$ 是
 与 $\delta_{2K}$ 有关的较小的常数：
 \begin{equation}
 C_0 = 2 \times \frac{1 - (1-\sqrt{2}) \delta_{2K}}{1 - (1+\sqrt{2})
@@ -307,14 +311,19 @@ C_0 = 2 \times \frac{1 - (1-\sqrt{2}) \delta_{2K}}{1 - (1+\sqrt{2})
 满足 $2K$ 阶 RIP ，即可用该矩阵作为压缩感知的测量矩阵。实践上，一般采用
 随机方法构造矩阵 $\Phi$ 。具体地，将 $\Phi$ 分解为两个矩阵的乘积
 \begin{equation}
-y = \Phi x = H \Psi x
+y = \Phi a = H \Psi a = H x
 \end{equation}
-其中 $\Psi$ 是稀疏字典，以保证 $x$ 的稀疏性；而 $\Psi$ 是一个 $M \times T$
-的随机矩阵，其中 $T$ 是原子的个数， $M$ 是采样点数。已经证明，若 $x$ 足够
-稀疏（稀疏度 $K$ 和 $M$ 相比足够小），且字典 $\Psi$ 充分不相关，则
-$\Phi = H \Psi$ 以高概率满足 $2K$ 阶 RIP 性质。
+其中 $\Psi$ 是稀疏字典，以保证 $x$ 的稀疏性；而 $H$ 是一个 $M \times T$
+的矩阵，其中 $T$ 是原子的个数， $M$ 是采样点数。在实际测量中，信号
+$x = \Psi a$ 是物理上真实存在的信号，而 $H$ 是作用在物理信号 $x$ 上的测量，
+称 $H$
+为\emph{物理测量矩阵}。 $\Phi = H \Psi$ 是数学上作用于稀疏信号 $x$ 的测量，
+为了方便，下面统一将 $\Phi$ （而不是 $H$）称为\emph{测量矩阵}。已经证明，若 $x$ 足够
+稀疏（稀疏度 $K$ 和 $M$ 相比足够小），字典 $\Psi$ 充分不相关，且 $H$ 是一个
+随机矩阵，则 $\Phi = H \Psi$ 以高概率满足 $2K$ 阶 RIP 性质。因此，压缩感知
+中的物理测量 $H$ 往往是随机矩阵。
 \begin{definition}[相关性]
-字典 $\Psi$ 的 \emph{相关性} 定义为：
+字典 $\Psi$ 的\emph{相关性} 定义为：
 \begin{equation}
 \mu(\Psi) = \max_{i \neq j} \frac{|\psi_i^T \psi_j|}{\|\psi_i\|_2
 \|\psi_j\|_2}
@@ -333,7 +342,7 @@ M \geq C_1(2K \log \frac{N}{2K} + 5.57 + t)
 $1 - e^{-t}$ 满足 $\delta_{2K} \leq 1/3$ 的 $2K$ 阶 RIP。
 \end{theorem}
 
-由于 $1/3 < \sqrt{2} - 1$ ，该定理表明，矩阵 $\Psi$ 满足定理
+由于 $1/3 < \sqrt{2} - 1$ ，该定理表明，矩阵 $\Phi$ 满足定理
 \ref{th:l1recovery} 的要求，可以作为压缩感知的测量矩阵。另外， $t$ 在指数项
 上，表明成功恢复的概率在理论门限附近迅速从 $0$ 增加到接近 $1$。
 
@@ -346,8 +355,8 @@ $1 - e^{-t}$ 满足 $\delta_{2K} \leq 1/3$ 的 $2K$ 阶 RIP。
 \node (n0) {$x = \Psi a$};
 \node [right of=n0] (n1) {$H\Psi a = \Phi a$};
 \node [right of=n1] (n2) {$\hat a = \Delta(\Phi a)$};
-\draw[->] (n0.east) -- node [above] {混叠欠采样} node [below] {测量矩阵
-$\Phi$} (n1);
+\draw[->] (n0.east) -- node [above] {混叠欠采样} node [below] {物理测
+量矩阵 $H$} (n1);
 \draw[->] (n1.east) -- node [above] {稀疏恢复} node [below] {恢复算法
 $\Delta$} (n2);
 \end{tikzpicture}

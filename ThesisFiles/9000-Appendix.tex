@@ -1,3 +1,24 @@
-\chapter{附录}
+\chapter{数值仿真程序}
 
-ooooorz.\todo{dummy}
+所有程序均在 GNU \verb|Octave| 环境下测试运行通过，
+不保证 \verb|MATLAB| 兼容性。
+
+\section{基于全变分最小化的仿真程序}
+
+该程序使用 \verb|TVAL3| 优化器，官方主页
+\url{http://www.caam.rice.edu/~optimization/L1/TVAL3/}。
+
+\lstset{basicstyle=\ttfamily}
+
+\lstinputlisting[language=octave,caption=主程序]{code/solar_tv_runtest_mask.m}
+
+\section{基于 $\ell_1$ 范数最小化的仿真程序}
+
+该程序使用 \verb|YALL1| 优化器，官方主页
+\url{http://www.caam.rice.edu/~optimization/L1/YALL1/}，为 Octave；
+以及 \verb|ltfat| 时频分析工具箱，官方主页
+\url{https://github.com/ltfat/ltfat}。
+
+\lstinputlisting[language=octave,caption=测量矩阵]{code/Phi.m}
+
+\lstinputlisting[language=octave,caption=主程序]{code/solar_l1_runtest_mask.m}
