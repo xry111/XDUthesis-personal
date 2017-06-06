@@ -114,8 +114,7 @@ $8$ 阶 Daubechies 滤波器，迭代次数为 $4$ 次\cite{ltfatnote015}
 优秀的全变分最小化求解器。关于该软件包的设计思路和实现细节，参见文献
 \cite{TVAL3CBLMaster} \cite{TVAL3CBLPhD}。
 
-\paragraph{对坏点的重建结果} 图 \ref{fig:TV0d} 给出了图 
-\ref{fig:testdata:0d} 的仿真恢复结果。
+对坏点（图 \ref{fig:testdata:0d} ）的重建结果如图 \ref{fig:TV0d} 所示。
 
 \begin{figure}
 \centering
@@ -146,8 +145,7 @@ $8$ 阶 Daubechies 滤波器，迭代次数为 $4$ 次\cite{ltfatnote015}
 可见， $M = 0.1 N$ 时重建完全失败，这是由于 $M$ 太小，不满足定理
 \ref{th:RandomRIP} 的要求，导致矩阵 $H$ 丧失 RIP 性质。
 
-\paragraph{对裂纹的重建结果} 图 \ref{fig:TV1d} 给出测试数据
-\ref{fig:testdata:1d} 的重建结果。
+对裂纹（图 \ref{fig:testdata:1d} ）的重建结果如图 \ref{fig:TV1d} 所示。
 
 \begin{figure}
 \centering
@@ -180,7 +178,7 @@ $8$ 阶 Daubechies 滤波器，迭代次数为 $4$ 次\cite{ltfatnote015}
 全变分最小化会促进图像梯度的稀疏性，导致图像出现类似阶梯函数的
 特性。
 
-\paragraph{对边界清晰的坏块重建结果} 见图 \ref{fig:TV2dsharp}。
+对边界清晰的坏块重建结果见图 \ref{fig:TV2dsharp}。
 可以看出，全变分最小化对边界稀疏的图像重建效果很好，甚至只要
 $10\%$ 的采样即可几乎完美地恢复出图像中的三个坏块。
 
@@ -210,7 +208,7 @@ $10\%$ 的采样即可几乎完美地恢复出图像中的三个坏块。
 \label{fig:TV2dsharp}
 \end{figure}
 
-\paragraph{对边界模糊的坏块重建结果} 如图 \ref{fig:TV2dsmooth}
+对边界模糊的坏块重建结果如图 \ref{fig:TV2dsmooth}
 所示。重建结果很差，这是由于图像
 \ref{fig:testdata:2dsmooth} 的梯度并不十分稀疏，导致定理
 \ref{th:RandomRIP} 的条件难以满足。可见，全变分最小化方法不适合
@@ -242,7 +240,7 @@ $10\%$ 的采样即可几乎完美地恢复出图像中的三个坏块。
 \label{fig:TV2dsmooth}
 \end{figure}
 
-\paragraph{对栅状电极的重建结果} 如图 \ref{fig:TVfinger}
+对栅状电极的重建结果如图 \ref{fig:TVfinger}
 所示。可以看出，栅状电极的存在严重破坏了梯度的稀疏性，导致
 全变分最小化恢复过程需要更多的采样数据。
 
@@ -279,8 +277,8 @@ $\ell_1$ 范数最小化重建采用 Zhang 等编写的 \verb|YALL1| 软件包�
 该软件包也采用交替方向算法进行最优化求解，运行效率较高，能够高效地完成
 数值仿真。
 
-\paragraph{对坏点的重建结果} 图 \ref{fig:l10d} 给出了图 
-\ref{fig:testdata:0d} 的 $\ell_1$ 最小化恢复结果。
+图 \ref{fig:l10d} 给出了坏点仿真数据（图 
+\ref{fig:testdata:0d} ）的 $\ell_1$ 最小化恢复结果。
 
 \begin{figure}
 \centering
@@ -322,8 +320,8 @@ $M=0.5$ 时更多，直观上图像质量发生了退化。这是由于 $\Phi$ �
 从而降低了 $\ell_1$ 优化的自由度，导致 $\ell_1$ 最小化本身具有的降噪功能
 难以充分发挥。
 
-\paragraph{对裂纹的重建结果} 图 \ref{fig:L11d} 给出测试数据
-\ref{fig:testdata:1d} 的重建结果。
+图 \ref{fig:L11d} 给出针对裂纹的测试数据（图 \ref{fig:testdata:1d} ）
+的重建结果。
 
 \begin{figure}
 \centering
@@ -354,7 +352,7 @@ $M=0.5$ 时更多，直观上图像质量发生了退化。这是由于 $\Phi$ �
 除了 $M = 0.1N$ 时重建结果很差外，其他三次重建都较好地恢复了
 图像中的裂纹。
 
-\paragraph{对边界清晰的坏块重建结果} 见图 \ref{fig:L12dsharp}。
+对边界清晰的坏块重建结果见图 \ref{fig:L12dsharp}。
 可以看出，边界稀疏图像更适合采用全变分最小化恢复， $\ell_1$ 恢复
 求解的结果在 $M$ 较小时较全变分方法更差。
 
@@ -384,7 +382,7 @@ $M=0.5$ 时更多，直观上图像质量发生了退化。这是由于 $\Phi$ �
 \label{fig:L12dsharp}
 \end{figure}
 
-\paragraph{对边界模糊的坏块重建结果} 如图 \ref{fig:L12dsmooth}
+对边界模糊的坏块重建结果如图 \ref{fig:L12dsmooth}
 所示。重建结果与全变分最小化的结果相比较好，因为小波变换相比于求梯度能更好
 地增加该图像的稀疏性。然而，横向比较表明，重建结果仍然不如其他测试数据，说
 明仍需进行进一步研究，寻找能够稀疏表示边界模糊坏块的字典。
@@ -415,7 +413,7 @@ $M=0.5$ 时更多，直观上图像质量发生了退化。这是由于 $\Phi$ �
 \label{fig:L12dsmooth}
 \end{figure}
 
-\paragraph{对栅状电极的重建结果} 如图 \ref{fig:L1finger}
+对栅状电极的重建结果如图 \ref{fig:L1finger}
 所示。 栅状电极的存在也严重破坏了图像在小波字典下的稀疏性，直到 $M = 0.5N$
 时才能够较好地恢复图像。
 
