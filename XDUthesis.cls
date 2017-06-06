@@ -47,9 +47,9 @@
  \setmonofont{DejaVu Sans Mono}
 \else
 \LoadClass[12pt,a4paper,UTF8]{ctexbook}[2015/05/16]
- \setCJKmainfont[ItalicFont={AR PL New Kai}, BoldFont={Source Han Sans HW SC}]{Source Han Serif CN}
- \setCJKsansfont{Source Han Sans HW SC}
- \setCJKmonofont{Source Han Sans HW SC}
+ \setCJKmainfont[ItalicFont={AR PL New Kai}, BoldFont={SimHei}]{SimSun}
+ \setCJKsansfont{SimHei}
+ \setCJKmonofont{SimHei}
 % \setmainfont{DejaVu Serif}
 % \setsansfont{DejaVu Sans}
 % \setmonofont{DejaVu Sans Mono}
@@ -166,10 +166,9 @@
 \renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
 \renewcommand\thempfootnote{\ding{\numexpr171+\value{mpfootnote}}}
 \ctexset{
- chapter/beforeskip = {20pt},
- chapter/format = {\zihao{3}\sffamily\centering},%修正章节标题错误加粗问题
- section/format = {\zihao{4}\rmfamily\centering},
- subsection/format = {\zihao{-4}\rmfamily}
+ chapter = {beforeskip=0pt, afterskip=20pt, nameformat=\zihao{3}\sffamily, titleformat=\zihao{3}\sffamily},%修正章节标题错误加粗问题
+ section = {beforeskip=12pt, format=\zihao{4}\rmfamily\centering},
+ subsection = {format = \zihao{-4}\rmfamily}
 }
 \RequirePackage{titletoc}
 \titlecontents{chapter}[0pt]{\bfseries}%
@@ -235,14 +234,14 @@
 
 %\newfontfamily\enheiti{DejaVu Sans} % 新加字体族，用于修正封面页标题英文字体非黑体问题，感谢lanthree <https://github.com/lanthree>同学
 \newcommand{\enheiti}{\sffamily}
-\newfontfamily\timesbd{Source Han Serif CN Heavy} % 新加字体族，用于修正中文摘要关键词中，英文关键词未加粗问题，感谢lanthree <https://github.com/lanthree>同学
+\newfontfamily\timesbd{Times New Roman Bold} % 新加字体族，用于修正中文摘要关键词中，英文关键词未加粗问题，感谢lanthree <https://github.com/lanthree>同学
 \def\make@abstract{%
 \cleardoublepage%
 \pagenumbering{roman}
 \pagestyle{myheadings}
 \phantomsection
 \vspace*{2em}
-\centerline{\sffamily\chaptersize\XDU@abstractname}\vskip5pt\par%
+\centerline{\sffamily\zihao{3}\XDU@abstractname}\vskip5pt\par%
 \vspace*{2em}
 \XDU@cabstract%
 \par\vspace*{2em}\noindent{\sffamily\zihao{-4}\timesbd{\XDU@keywordsname：\XDU@keywords}}%
