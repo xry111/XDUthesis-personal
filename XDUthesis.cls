@@ -50,6 +50,9 @@
  \setCJKmainfont[ItalicFont={AR PL New Kai}, BoldFont={SimHei}]{SimSun}
  \setCJKsansfont{SimHei}
  \setCJKmonofont{SimHei}
+ \setmainfont{Times New Roman}
+ \setsansfont{Arial}
+ \setmonofont{Courier New}
 % \setmainfont{DejaVu Serif}
 % \setsansfont{DejaVu Sans}
 % \setmonofont{DejaVu Sans Mono}
