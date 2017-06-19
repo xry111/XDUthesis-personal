@@ -30,7 +30,7 @@ $Q_M$ 是一个随机的 $M \times N$ 矩阵，选取 $W P_N$ 的 $M$ 行。
 $P_N$ 只需要 $O(N)$ ，$Q_M$ 的作用是选取 $M$ 行，只需要 $O(M)$ ，而
 $W$ 相当于 $N/B$ 次快速 Hadamard-Walsh 变换，时间复杂度为
 \begin{equation}
-T(N,B) = O(N/B \times B log B) = O(NlogB)
+T(N,B) = O(N + M + N/B \times B log B) = O(N(1+logB))
 \end{equation}
 相比于完全随机矩阵需要 $O(NM)$ 的运算时间，SBHE 的运算速度要快得多，可以
 有效减少重建时间。和 Bernoulli 矩阵一样， SBHE 是二值化的，因此容易在光学
