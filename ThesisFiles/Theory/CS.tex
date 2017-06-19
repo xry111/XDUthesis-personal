@@ -287,7 +287,7 @@ y = \Phi a + z
 \end{equation}
 中的噪声 $z$ 满足 $\|z\|_2 \leq \epsilon$，则 Lasso 回归的结果
 \begin{equation}
-\hat a = \mathop{\arg\min}_{a'} \|a'\|_1 \quad s.t. \quad \|y-\Phi a'\|_2
+\hat a = \mathop{\arg\min}_{a} \|a\|_1 \quad s.t. \quad \|y-\Phi a\|_2
 \leq \epsilon
 \end{equation}
 满足
@@ -379,7 +379,7 @@ $\Delta$} (n2);
 促进 $x$ 的稀疏性，同时通过距离函数 $H$ 施加约束，使得 $\Phi x$ 接近测量值
 $y$：
 \begin{equation} \label{eqn:convexopt}
-\hat x = \mathop{\arg \min}_{x'} J(x) \quad s.t. \quad H(\Phi x, y) \leq
+\hat x = \mathop{\arg \min}_{x} J(x) \quad s.t. \quad H(\Phi x, y) \leq
 \epsilon
 \end{equation}
 若选定 $J(x) = \|x\|_1$，$H(\Phi x, y) = \|\Phi x - y\|_2$，
@@ -403,7 +403,7 @@ TV(x) = \| |D(x)| \|_1
 在式 \ref{eqn:convexopt} 中取 $J(x) = TV(x)$ ，即得到下列问题：
 \begin{problem} \label{prob:TVopt}
 \begin{equation}
-\hat x = \mathop{\arg \min}_{x'} TV(x') \quad s.t. \quad 
+\hat x = \mathop{\arg \min}_{x} TV(x) \quad s.t. \quad 
 \|\Phi x - y\|_2 \leq \epsilon
 \end{equation}
 \end{problem}

@@ -40,8 +40,8 @@ y = Hx + z
 和压缩感知恢复问题一样，图像修补问题亦可通过求解全变分最小化或 $\ell_1$
 最小化解决，下面以全变分最小化为例说明。
 \begin{equation}
-\hat x = \mathop{\arg\min}_{x'} TV(x') \quad s.t. \quad
-\|Hx' - y\|_2 \leq \epsilon
+\hat x = \mathop{\arg\min}_{x} TV(x) \quad s.t. \quad
+\|Hx - y\|_2 \leq \epsilon
 \end{equation}
 注意虽然图像修补问题和压缩感知恢复问题都能够用全变分最小化方法求解，但其
 内涵截然不同。在压缩感知理论中，若矩阵 $H$ 满足 RIP ，则可以认为测量
