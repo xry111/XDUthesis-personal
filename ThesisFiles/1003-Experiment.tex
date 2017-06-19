@@ -11,7 +11,14 @@ NPL 自 2014 年起开始构建其基于压缩感知的太阳能缺陷检测装�
 上。DMD 光学面上的大量微小镜面由外部提供的信号驱动，产生对应的结构光。
 为了消除 DMD 产生的衍射效应，采用空间频率滤波器过滤结构光，
 用过滤后的结构光照射被测太阳能电池。产生的光电流经 I-V
-变换和采样后得到一次测量的结果。
+变换和采样后得到一次测量的结果。图 \ref{fig:npl} 给出 NPL 原型装置的框图。
+
+\begin{figure}
+\centering
+\includegraphics[width=.6\textwidth]{Figure/npl.png}
+\caption{NPL 原型装置的原理图}
+\label{fig:npl}
+\end{figure}
 
 NPL 装置采用一种称为 SBHE 的测量矩阵 \cite{BlockHadamard} ：
 \begin{definition}[SBHE 矩阵]
@@ -40,9 +47,18 @@ T(N,B) = O(N + M + N/B \times B log B) = O(N(1+logB))
 
 和 NPL 的实现相比，西安电子科技大学团队的原型装置是在较短时间内完成的，
 其结构也较为简单。作为研究原型，它没有使用 DMD ，而是直接将待测太阳能电池
-贴在 LCD 显示器上，由显示器提供结构光。这种方法成本较低，但不能适用于更大
+贴在 LCD 显示器上，由显示器提供结构光，如图 \ref{fig:xdu} 所示。
+这种方法成本较低，但不能适用于更大
 的太阳能组件。另外，由于没有使用激光光源，结构光的光谱并不匹配太阳能电池
 的最大响应波段，这些问题需要在后续实验中进行改进。
+
+\begin{figure}
+\centering
+\includegraphics[width=.6\textwidth]{Figure/xdu.pdf}
+\caption{(a) LCD 显示的随机模式。 (b) 太阳能电池的感光面被贴在 LCD 表面，
+其输出电流被测量。}
+\label{fig:xdu}
+\end{figure}
 
 文献 \cite{XDUCLBIC} 指出，该装置相比于传统的 LBIC 扫描法，时间效率有
 $10$ 至 $15$ 倍的提升。实际上，时间效率的提升是两种因素的共同作用。首先，
